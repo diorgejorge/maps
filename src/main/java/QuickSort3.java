@@ -5,34 +5,35 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class QuickSort3 {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()){
             String line = sc.nextLine();
             ArrayList<Integer> array = new ArrayList<>();
             ArrayList<Integer> arrayJava8 = new ArrayList<>();
-            int pivotIndex = array.size()-1;
             if(line.length()>1){
                 array =
                         Pattern.compile(" ")
                                 .splitAsStream(line).map(s -> Integer.parseInt(s))
                                 .collect(Collectors.toCollection(ArrayList::new));
                 arrayJava8 = array;
-                quickSort(array,0,pivotIndex);
+                quickSort(array,0,array.size()-1);
             }
             System.out.println(array);
-            /*
+             /*
                 Como eu realmente faria com java 8
              */
-            System.out.println(arrayJava8.stream().sorted().collect(Collectors.toList()));
+            System.out.println(" usando java8: "+arrayJava8.stream().sorted().collect(Collectors.toList()));
              /*
                 e com java 8 lista reversa
              */
-            System.out.println(arrayJava8.stream().sorted((x,y)->Integer.compare(y,x)).collect(Collectors.toList()));
+            System.out.println(" reverso com java8: "+arrayJava8.stream().sorted((x,y)->Integer.compare(y,x)).collect(Collectors.toList()));
+            main(args);
         }
     }
 
-    public static void quickSort(List<Integer> array, int start, int end){
+    public static void quickSort(List<Integer> array,int start,int end){
         if(start>=end) return;
         int pivot =start;
         for(int x = start+1;x<=end;x++){
